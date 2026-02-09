@@ -34,7 +34,7 @@ Please actively use git commits to document your progress and regularly push you
 | **Mandatory** Check-in & Q&A Session    | 17.02.2026 | 16:00 | Online      |
 | **Mandatory** Check-in & Q&A Session    | 19.02.2026 | 16:00 | Online      |
 | **Final Submission**                    | 22.02.2026 | 23:59 | Online      |
-| **Final Presentations**                 | 24.02.2026 | 23:59 | **On-site** |
+| **Final Presentations**                 | 24.02.2026 | 10:00 | **On-site** |
 
 Please note that attendance is **mandatory** for all team members in order to successfully complete the course.
 
