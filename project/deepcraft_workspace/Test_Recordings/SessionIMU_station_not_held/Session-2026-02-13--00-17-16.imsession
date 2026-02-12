@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ImagimobStudio version="0.9">
+  <Timeline id="48a77517-9198-415d-b642-4b00b03487b3">
+    <Tracks>
+      <Track name="Live Labeling" type="labelcsv">
+        <PayloadFile>Live-Labeling.label</PayloadFile>
+        <Shape />
+      </Track>
+      <Track name="Microphone Data" type="datacsv" timecoded="TimestampBegin" isLabelTrack="False" frequency="50">
+        <PayloadFile>Microphone-Data.data</PayloadFile>
+        <Offset unit="seconds">9.9999000000E-003</Offset>
+        <Shape>
+          <Axis name="Axis" size="3">
+            <Label index="0">X</Label>
+            <Label index="1">Y</Label>
+            <Label index="2">Z</Label>
+          </Axis>
+          <Axis name="Sensor" size="2">
+            <Label index="0">Accel</Label>
+            <Label index="1">Gyro</Label>
+          </Axis>
+        </Shape>
+      </Track>
+    </Tracks>
+  </Timeline>
+</ImagimobStudio>
