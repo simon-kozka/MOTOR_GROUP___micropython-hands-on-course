@@ -1,0 +1,11 @@
+#basics
+[unlabeled] - motor stop
+working - motor is spinning normally at 75% pwm
+impact - motor impacted something and has trouble spinning back up to speed
+imbalance - motor spinning an uneven weight or similar
+
+#bonus features that might be implemented in the future:
+spin-up - smooth motor start using pwm
+spin-down - smooth motor stop using pwm
+grinding - motor bearing worn out (dust and dirt inside of the motor)
+accident - motor collides with a person (triggered by shouting and screaming)
