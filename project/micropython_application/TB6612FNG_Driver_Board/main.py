@@ -68,7 +68,7 @@ def PWM_Config ():
     speed_pwm.freq(1000) # 1 kHz is good for TT motors
 
 # Defining Basic Control Functions
-def stop_motor():
+def Stop_Motor():
     """Stops the motor gradually."""
     dir_pin1.value(0)
     dir_pin2.value(0)
@@ -82,7 +82,7 @@ def Hard_Break_Motor():
     speed_pwm.duty_u16(0)
     print("Motor Hard Braking")
 
-def move_motor(speed, direction):
+def Move_Motor(speed, direction):
     """
     :param speed: 0 to 65535
     :param direction: 'forward' or 'backward'
@@ -107,9 +107,9 @@ def move_motor(speed, direction):
 # Complex Routines
 def Clean_Motor () :
     for i in range (0, 3) :
-        move_motor(20000, 'forward')
+        Move_Motor(20000, 'forward')
         time.sleep(1)    
-        move_motor(20000, 'backward')
+        Move_Motor(20000, 'backward')
         time.sleep(1)
 
 
@@ -158,6 +158,7 @@ def main():
 
 if __name__ == "__main__":
     main()
+    Stop_Motor()
 
 
 
