@@ -31,8 +31,8 @@ Please actively use git commits to document your progress and regularly push you
 | DEEPCRAFT™ Studio Hands-on Introduction | 10.02.2026 | 09:00 | **On-site** |
 | **Presentation of Project Ideas**       | 10.02.2026 | 09:00 | **On-site** |
 | [**Mandatory** Check-in & Q&A Session](https://teams.microsoft.com/meet/36912038824995?p=IZrHU7UTvUlSL3583i)    | 13.02.2026 | 15:00 | Online      |
-| **Mandatory** Check-in & Q&A Session    | 17.02.2026 | 16:00 | Online      |
-| **Mandatory** Check-in & Q&A Session    | 19.02.2026 | 16:00 | Online      |
+| [**Mandatory** Check-in & Q&A Session](https://teams.microsoft.com/meet/37983691381329?p=93ldEpHqqhMSQ26ZxE)    | 17.02.2026 | 16:00 | Online      |
+| [**Mandatory** Check-in & Q&A Session](https://teams.microsoft.com/meet/36397869626856?p=LfntIihhRxdkNX2rpr)    | 19.02.2026 | 16:00 | Online      |
 | **Final Submission**                    | 22.02.2026 | 23:59 | Online      |
 | **Final Presentations**                 | 23.02.2026 | 13:00 | **On-site** |
 
