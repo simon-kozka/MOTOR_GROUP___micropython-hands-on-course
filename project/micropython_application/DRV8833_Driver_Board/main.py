@@ -6,6 +6,7 @@ import time
 from machine import I2C, Pin, PWM
 from micropython_bmi270 import bmi270
 import machine
+from machine import PDM_PCM, freq, AUDIO_PDM_24_576_000_HZ
 
 #Initializing I2C
 i2c = I2C(scl='P0_2', sda='P0_3') 
@@ -16,7 +17,7 @@ bmi = bmi270.BMI270(i2c)
 
 #Mic Config code taken from Material Detection Exmaple
 def Mic_Config () :
-
+    freq(AUDIO_PDM_24_576_000_HZ)
     SAMPLE_RATE_HZ = 16000  # Desired sample rate in Hz
     AUDIO_BUFFER_SIZE = 512  # Size of the audio buffer
     global AUDIO_BITS_PER_SAMPLE; AUDIO_BITS_PER_SAMPLE = 16  # Dynamic range in bits
@@ -49,6 +50,15 @@ def sample_normalize(sample):
     return sample / float(1 << (AUDIO_BITS_PER_SAMPLE - 1))
 
 
+user_button = Pin('P5_2', Pin.IN, Pin.PULL_UP)
+
+def reboot_handler(pin):
+    print("\n[BUTTON PRESSED] Rebooting board...")
+    time.sleep(0.1) # Debounce
+    machine.soft_reset()
+
+# Attach the interrupt: trigger when the button is pressed (falling edge)
+user_button.irq(trigger=Pin.IRQ_FALLING, handler=reboot_handler)
 
 
 
@@ -66,14 +76,14 @@ def PWM_Config ():
 
 # Defining Basic Control Functions
 def Set_Speed (speed) :
-    if (speed < 0) :
-        duty = int((-speed // 100) * 65535)
+    if (speed <= 0 and speed >= -100) :
+        duty = int((-speed * 65535) / 100)
         dir_pin1.duty_u16(duty)
         dir_pin2.duty_u16(0)
         print("Motor Spin Clockwise")
         return;
-    if (speed > 0) :
-        duty = int((speed // 100) * 65535)
+    if (speed >= 0 and speed <= 100) :
+        duty = int((speed * 65535) / 100)
         dir_pin1.duty_u16(0)
         dir_pin2.duty_u16(duty)
         print("Motor Spin CounterClockwise")
@@ -99,7 +109,7 @@ def Motor_Hard_Break():
 
 # Complex Routines
 def Motor_Self_Clean () :
-    for i in range (0, 3) :
+    for i in range (0, 2) :
         Set_Speed(50);
         time.sleep_ms(2000);
         Motor_Stop()
@@ -128,7 +138,7 @@ def main():
     Intialize_Model ()
     PWM_Config ()
     machine.freq(machine.AUDIO_PDM_24_576_000_HZ)
-    for i in range (0, 10) :
+    for i in range (0, 2) :
         time.sleep_ms(1000)
         status = Get_Status()
         if status == 0 : #unlabled
