@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<Imaginet version="2.0.0.0">
+  <Compound unit="d419d86b-7b57-41d3-9a74-ab428f13a213">
+    <Nodes>
+      <LabelListNode id="node_2" width="120" height="120" x="306.5" y="34.5" enabled="true" profiling="false" name="Predefined Labels">
+        <Label>working</Label>
+        <Label>impact</Label>
+        <Label>imbalance</Label>
+      </LabelListNode>
+      <UnitNode id="node_1" x="432.5" y="243.5" enabled="true" profiling="false" name="Microphone Data" unit="ImagimobStudio.Modules.DataTrack" />
+      <DeviceNode id="node_0" x="83" y="230.5" enabled="true" profiling="false" name="Microphone" board="290de5cb-460b-41bf-1f19-8d0e240faff7" boardName="PSOC 6 AI (CY8CKIT-06S2-AI)" device="1" />
+    </Nodes>
+    <Connections>
+      <Connection>
+        <Source node="node_0" param="Audio" />
+        <Target node="node_1" param="data" />
+      </Connection>
+    </Connections>
+  </Compound>
+</Imaginet>

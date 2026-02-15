@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<Imaginet version="2.0.0.0">
+  <Compound unit="d419d86b-7b57-41d3-9a74-ab428f13a213">
+    <Nodes>
+      <UnitNode id="node_2" x="424" y="270.5" enabled="true" profiling="false" name="IMU Data" unit="ImagimobStudio.Modules.DataTrack" />
+      <LabelListNode id="node_1" width="120" height="120" x="308" y="35" enabled="true" profiling="false" name="Predefined Labels">
+        <Label>working</Label>
+        <Label>impact</Label>
+        <Label>imbalance</Label>
+      </LabelListNode>
+      <DeviceNode id="node_0" x="52.5" y="258.5" enabled="true" profiling="false" name="IMU" board="290de5cb-460b-41bf-1f19-8d0e240faff7" boardName="PSOC 6 AI (CY8CKIT-06S2-AI)" device="2">
+        <Int32Argument param="accel range_2">0</Int32Argument>
+        <Int32Argument param="frequency_1">2</Int32Argument>
+        <Int32Argument param="gyro range_3">3</Int32Argument>
+      </DeviceNode>
+    </Nodes>
+    <Connections>
+      <Connection>
+        <Source node="node_0" param="Combined" />
+        <Target node="node_2" param="data" />
+      </Connection>
+    </Connections>
+  </Compound>
+</Imaginet>
