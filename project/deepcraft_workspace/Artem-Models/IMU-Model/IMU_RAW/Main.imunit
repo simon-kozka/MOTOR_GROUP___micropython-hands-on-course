@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<Imaginet version="2.0.0.0">
+  <Compound unit="d419d86b-7b57-41d3-9a74-ab428f13a213">
+    <Nodes>
+      <UnitNode id="node_7" x="1363.078553486249" y="697.7606925593221" enabled="true" profiling="false" name="conv1d-small-balanced-0 model Data" unit="ImagimobStudio.Modules.DataTrack" />
+      <DotNetNode id="node_6" x="935.1935831201513" y="680.7911418515731" enabled="true" profiling="false" name="conv1d-small-balanced-0 model">
+        <Interop assembly="Imaginet.Units.KerasModel" class="Imaginet.Units.KerasModel.KerasModel" method="LoadNetwork" />
+        <Input param="File" type="FileReference">
+          <StringArgument>C:/Users/xacura/EdgeAI_Project/MOTOR_GROUP___micropython-hands-on-course/project/deepcraft_workspace/Artem-Models/IMU-Model/IMU_RAW/Models/conv1d-small-balanced-0/conv1d-small-balanced-0.h5</StringArgument>
+        </Input>
+        <Input param="input" type="Tensor" />
+        <Output param="output" type="Tensor" />
+      </DotNetNode>
+      <DotNetNode id="node_5" x="903.4725578664293" y="520.6648417065892" enabled="true" profiling="false" name="conv1d-small-balanced-0 preprocessor">
+        <Interop assembly="Imaginet.Units.KerasModel" class="Imaginet.Units.KerasModel.KerasModel" method="LoadPreprocessor" />
+        <Input param="File" type="FileReference">
+          <StringArgument>C:/Users/xacura/EdgeAI_Project/MOTOR_GROUP___micropython-hands-on-course/project/deepcraft_workspace/Artem-Models/IMU-Model/IMU_RAW/Models/conv1d-small-balanced-0/conv1d-small-balanced-0.h5</StringArgument>
+        </Input>
+        <Input param="input" type="Tensor" />
+        <Output param="output" type="Tensor" />
+      </DotNetNode>
+      <LabelListNode id="node_1" width="120" height="120" x="308" y="35" enabled="true" profiling="false" name="Predefined Labels">
+        <Label>working</Label>
+        <Label>impact</Label>
+        <Label>imbalance</Label>
+      </LabelListNode>
+      <DeviceNode id="node_4" x="93.37676591845371" y="471.8292797806475" enabled="true" profiling="false" name="IMU" board="290de5cb-460b-41bf-1f19-8d0e2628aff7" boardName="PSOC 6 AI (CY8CKIT-06S2-AI)" device="2">
+        <Int32Argument param="frequency_1">2</Int32Argument>
+        <Int32Argument param="accel range_2">0</Int32Argument>
+        <Int32Argument param="gyro range_3">3</Int32Argument>
+      </DeviceNode>
+      <UnitNode id="node_3" x="477.35834106164293" y="474.70195989393795" enabled="true" profiling="false" unit="Imaginet.Units.Math.Reshape">
+        <ShapeArgument param="shape">[6]</ShapeArgument>
+      </UnitNode>
+      <UnitNode id="node_2" x="424" y="270.5" enabled="true" profiling="false" name="IMU Data" unit="ImagimobStudio.Modules.DataTrack" />
+    </Nodes>
+    <Connections>
+      <Connection>
+        <Source node="node_4" param="Combined" />
+        <Target node="node_3" param="input" />
+      </Connection>
+      <Connection>
+        <Source node="node_4" param="Combined" />
+        <Target node="node_2" param="data" />
+      </Connection>
+      <Connection>
+        <Source node="node_5" param="output" />
+        <Target node="node_6" param="input" />
+      </Connection>
+      <Connection>
+        <Source node="node_3" param="output" />
+        <Target node="node_5" param="input" />
+      </Connection>
+      <Connection>
+        <Source node="node_6" param="output" />
+        <Target node="node_7" param="data" />
+      </Connection>
+    </Connections>
+  </Compound>
+</Imaginet>

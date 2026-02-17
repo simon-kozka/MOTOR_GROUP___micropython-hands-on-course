@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<ImagimobStudio version="2.0.0.0">
+  <Project id="bfd97a66-3507-4192-a80b-93f98f981977">
+    <Resources />
+    <Options>
+      <UseCMSIS>true</UseCMSIS>
+    </Options>
+    <CodeGenerationParams>
+      <Unit id="d419d86b-7b57-41d3-9a74-ab428f13a213">
+        <Input>node_3</Input>
+        <Output>node_6</Output>
+        <Platform>InfineonPsoc6</Platform>
+        <OutputFileName>model</OutputFileName>
+        <OutputDirectory>CodeGen</OutputDirectory>
+        <CPrefix>IMAI_</CPrefix>
+        <TimestampTracking>false</TimestampTracking>
+        <UseCmsis>true</UseCmsis>
+        <TensorFlowLiteMicroApi>ModusToolbox_ML_Middleware_V3</TensorFlowLiteMicroApi>
+        <MetaWareOptions>
+          <VBufferSize>128000</VBufferSize>
+          <BatchSize>256</BatchSize>
+          <SampleCount>1000</SampleCount>
+          <Clusters>50</Clusters>
+          <ReGenerateData>false</ReGenerateData>
+          <RecursionLimit>1000</RecursionLimit>
+          <MaxBlockDependency>3</MaxBlockDependency>
+          <Sparsity>false</Sparsity>
+          <EthosUMemoryMode>SharedSram</EthosUMemoryMode>
+          <EthosUOptimize>Performance</EthosUOptimize>
+          <EthosUSystemConfig>Pse8xSOCMEM300MHz</EthosUSystemConfig>
+          <EthosUTensorAllocator>HillClimb</EthosUTensorAllocator>
+        </MetaWareOptions>
+        <MetaWareOptions>
+          <VBufferSize>128000</VBufferSize>
+          <BatchSize>256</BatchSize>
+          <SampleCount>1000</SampleCount>
+          <Clusters>50</Clusters>
+          <ReGenerateData>false</ReGenerateData>
+          <RecursionLimit>1000</RecursionLimit>
+          <MaxBlockDependency>3</MaxBlockDependency>
+          <Sparsity>false</Sparsity>
+          <EthosUMemoryMode>SharedSram</EthosUMemoryMode>
+          <EthosUOptimize>Performance</EthosUOptimize>
+          <EthosUSystemConfig>Pse8xSOCMEM300MHz</EthosUSystemConfig>
+          <EthosUTensorAllocator>HillClimb</EthosUTensorAllocator>
+        </MetaWareOptions>
+      </Unit>
+    </CodeGenerationParams>
+  </Project>
+</ImagimobStudio>
