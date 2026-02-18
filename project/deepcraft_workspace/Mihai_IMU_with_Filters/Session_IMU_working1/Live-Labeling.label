@@ -1,0 +1,4 @@
+Time(Seconds),Length(Seconds),Label(string),Confidence(double),Comment(string)
+5.3503281000000005,19.847839200000003,working,1,
+35.5061246,21.4292545,working,1,
+65.9670149,34.89724199999999,working,1,

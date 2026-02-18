@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<Imaginet version="2.0.0.0">
+  <Compound unit="d419d86b-7b57-41d3-9a74-ab428f13a213">
+    <Nodes>
+      <DeviceNode id="node_38" x="236.8877267100081" y="276.903068322498" enabled="true" profiling="false" name="IMU" board="290de5cb-460b-41bf-1f19-8d10051baff7" boardName="PSOC 6 AI (CY8CKIT-06S2-AI)" device="2">
+        <Int32Argument param="mode_4">2</Int32Argument>
+        <Int32Argument param="frequency_1">3</Int32Argument>
+      </DeviceNode>
+      <UnitNode id="node_39" x="572.4990425353625" y="311.1880938234387" enabled="true" profiling="false" name="IMU Data" unit="ImagimobStudio.Modules.DataTrack" />
+      <DotNetNode id="node_41" x="333" y="607.5" enabled="true" profiling="false" name="conv1d-medium-balanced-0 model">
+        <Interop assembly="Imaginet.Units.KerasModel" class="Imaginet.Units.KerasModel.KerasModel" method="LoadNetwork" />
+        <Input param="File" type="FileReference">
+          <StringArgument>C:/Storage/ToSync/Mihai/TU_Wien/Semester/Semester_3/FW_Infineon/Deepcraft/Classification_IMU/conv1d-medium-balanced-0/conv1d-medium-balanced-0.h5</StringArgument>
+        </Input>
+        <Input param="input" type="Tensor" />
+        <Output param="output" type="Tensor" />
+      </DotNetNode>
+      <LabelListNode id="node_2" width="120" height="120" x="506.31222826158387" y="111.92267339932573" enabled="true" profiling="false" name="Predefined Labels">
+        <Label>working</Label>
+        <Label>impact</Label>
+        <Label>imbalance</Label>
+      </LabelListNode>
+      <DotNetNode id="node_40" x="411" y="454.5" enabled="true" profiling="false" name="conv1d-medium-balanced-0 preprocessor">
+        <Interop assembly="Imaginet.Units.KerasModel" class="Imaginet.Units.KerasModel.KerasModel" method="LoadPreprocessor" />
+        <Input param="File" type="FileReference">
+          <StringArgument>C:/Storage/ToSync/Mihai/TU_Wien/Semester/Semester_3/FW_Infineon/Deepcraft/Classification_IMU/conv1d-medium-balanced-0/conv1d-medium-balanced-0.h5</StringArgument>
+        </Input>
+        <Input param="input" type="Tensor" />
+        <Output param="output" type="Tensor" />
+      </DotNetNode>
+      <UnitNode id="node_42" x="785.5" y="637.5" enabled="true" profiling="false" name="conv1d-medium-balanced-0 model Data" unit="ImagimobStudio.Modules.DataTrack" />
+    </Nodes>
+    <Connections>
+      <Connection>
+        <Source node="node_38" param="Accel" />
+        <Target node="node_39" param="data" />
+      </Connection>
+      <Connection>
+        <Source node="node_40" param="output" />
+        <Target node="node_41" param="input" />
+      </Connection>
+      <Connection>
+        <Source node="node_38" param="Accel" />
+        <Target node="node_40" param="input" />
+      </Connection>
+      <Connection>
+        <Source node="node_41" param="output" />
+        <Target node="node_42" param="data" />
+      </Connection>
+    </Connections>
+  </Compound>
+</Imaginet>

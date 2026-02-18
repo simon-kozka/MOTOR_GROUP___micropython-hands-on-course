@@ -1,0 +1,228 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<Imaginet version="2.0.0.0">
+  <Compound unit="d419d86b-7b57-41d3-9a74-ab428f13a213">
+    <Nodes>
+      <UnitNode id="node_52" x="-530.0450942209177" y="513.4732413366879" enabled="true" profiling="false" unit="Imaginet.Units.Math.Add" />
+      <UnitNode id="node_64" x="2189.7226134484927" y="1060.689666996489" enabled="true" profiling="false" unit="Imaginet.Units.Math.Concat" />
+      <UnitNode id="node_57" x="-796.8734706844739" y="634.5951600510948" enabled="true" profiling="false" unit="Imaginet.Units.Math.Pow">
+        <DoubleArgument param="exponent">2</DoubleArgument>
+      </UnitNode>
+      <UnitNode id="node_68" x="127.75865552760831" y="679.0968691110593" enabled="true" profiling="false" unit="Imaginet.Units.Filter.HighPassFilter" />
+      <UnitNode id="node_58" x="2993.554062709244" y="1113.9330017148513" enabled="true" profiling="false" name="Output" unit="ImagimobStudio.Modules.DataTrack" />
+      <UnitNode id="node_86" x="2736.539140226646" y="1086.9160044186608" enabled="true" profiling="false" unit="Imaginet.Units.Math.Concat" />
+      <UnitNode id="node_75" x="1718.8597399490304" y="370.6610680399034" enabled="true" profiling="false" unit="Imaginet.Units.Math.Pow">
+        <DoubleArgument param="exponent">2</DoubleArgument>
+      </UnitNode>
+      <DeviceNode id="node_38" x="-1454.359442824616" y="527.5834612530659" enabled="true" profiling="false" name="IMU" board="290de5cb-460b-41bf-1f19-8d10051baff7" boardName="PSOC 6 AI (CY8CKIT-06S2-AI)" device="2">
+        <Int32Argument param="mode_4">2</Int32Argument>
+        <Int32Argument param="frequency_1">3</Int32Argument>
+      </DeviceNode>
+      <UnitNode id="node_69" x="1168.4180392827268" y="909.250191438543" enabled="true" profiling="false" unit="Imaginet.Units.Math.Mul" />
+      <UnitNode id="node_70" x="1409.241643720681" y="914.1079727497856" enabled="true" profiling="false" unit="Imaginet.Units.Math.Average" />
+      <UnitNode id="node_78" x="1480.7559704049554" y="345.27717705965586" enabled="true" profiling="false" unit="Imaginet.Units.TensorFlow.Layers.Flatten" />
+      <UnitNode id="node_53" x="-1061.0797531918108" y="711.8824481011525" enabled="true" profiling="false" unit="Imaginet.Units.Math.Select">
+        <Int32Argument param="count">1</Int32Argument>
+        <Int32Argument param="index">2</Int32Argument>
+      </UnitNode>
+      <UnitNode id="node_63" x="-795.8856278206673" y="454.7650901036742" enabled="true" profiling="false" unit="Imaginet.Units.Math.Pow">
+        <DoubleArgument param="exponent">2</DoubleArgument>
+      </UnitNode>
+      <UnitNode id="node_71" x="1650.6616922091484" y="964.4430488738973" enabled="true" profiling="false" unit="Imaginet.Units.Math.Pow">
+        <DoubleArgument param="exponent">0.5</DoubleArgument>
+      </UnitNode>
+      <UnitNode id="node_90" x="2342.1479045289652" y="826.5896340274311" enabled="true" profiling="false" unit="Imaginet.Units.Math.Max" />
+      <UnitNode id="node_49" x="-1056.6001047928958" y="426.79141655586375" enabled="true" profiling="false" unit="Imaginet.Units.Math.Select">
+        <Int32Argument param="count">1</Int32Argument>
+      </UnitNode>
+      <UnitNode id="node_50" x="1059.4041311200938" y="1196.512163980939" enabled="true" profiling="false" unit="Imaginet.Units.Math.Max" />
+      <UnitNode id="node_56" x="447.7487741793238" y="682.1774362413507" enabled="true" profiling="false" unit="Imaginet.Units.Signal.SlidingWindow">
+        <ShapeArgument param="window_shape">[32,1]</ShapeArgument>
+        <Int32Argument param="stride">1</Int32Argument>
+      </UnitNode>
+      <UnitNode id="node_45" x="858.7134834468402" y="706.149868581399" enabled="true" profiling="false" unit="Imaginet.Units.TensorFlow.Layers.Flatten" />
+      <UnitNode id="node_76" x="1717.5455441486533" y="461.6261531320587" enabled="true" profiling="false" unit="Imaginet.Units.Math.Pow">
+        <DoubleArgument param="exponent">2</DoubleArgument>
+      </UnitNode>
+      <UnitNode id="node_72" x="1399.041831517996" y="501.9902901352925" enabled="true" profiling="false" unit="Imaginet.Units.Math.Select">
+        <Int32Argument param="count">1</Int32Argument>
+      </UnitNode>
+      <UnitNode id="node_61" x="1117.8354388938615" y="731.689736949736" enabled="true" profiling="false" unit="Imaginet.Units.Signal.RealFft" />
+      <UnitNode id="node_44" x="-1059.9228823129558" y="568.0810235711606" enabled="true" profiling="false" unit="Imaginet.Units.Math.Select">
+        <Int32Argument param="count">1</Int32Argument>
+        <Int32Argument param="index">1</Int32Argument>
+      </UnitNode>
+      <UnitNode id="node_67" x="-323.0811442163897" y="634.5338668987943" enabled="true" profiling="false" unit="Imaginet.Units.Math.Add" />
+      <UnitNode id="node_74" x="1984.7002735487802" y="429.3692192729171" enabled="true" profiling="false" unit="Imaginet.Units.Math.Add" />
+      <UnitNode id="node_65" x="1909.7596030082823" y="1063.8515582046346" enabled="true" profiling="false" unit="Imaginet.Units.Math.Div" />
+      <UnitNode id="node_66" x="-797.1998236210445" y="545.7301751958295" enabled="true" profiling="false" unit="Imaginet.Units.Math.Pow">
+        <DoubleArgument param="exponent">2</DoubleArgument>
+      </UnitNode>
+      <LabelListNode id="node_2" width="120" height="120" x="554.7667412103413" y="345.49827428051617" enabled="true" profiling="false" name="Predefined Labels">
+        <Label>working</Label>
+        <Label>impact</Label>
+        <Label>imbalance</Label>
+      </LabelListNode>
+      <UnitNode id="node_77" x="1933.7078103952897" y="780.7826048858369" enabled="true" profiling="false" name="Magnitude of FFT" unit="Imaginet.Units.Math.Pow">
+        <DoubleArgument param="exponent">0.5</DoubleArgument>
+      </UnitNode>
+      <UnitNode id="node_60" x="-122.72921607440958" y="645.4197430656604" enabled="true" profiling="false" unit="Imaginet.Units.Math.Pow">
+        <DoubleArgument param="exponent">0.5</DoubleArgument>
+      </UnitNode>
+      <UnitNode id="node_79" x="1591.8195731361525" y="606.5180860926023" enabled="true" profiling="false" unit="Imaginet.Units.TensorFlow.Layers.Flatten" />
+      <UnitNode id="node_73" x="1397.4840628348709" y="648.1336714521581" enabled="true" profiling="false" unit="Imaginet.Units.Math.Select">
+        <Int32Argument param="count">1</Int32Argument>
+        <Int32Argument param="index">1</Int32Argument>
+      </UnitNode>
+    </Nodes>
+    <Connections>
+      <Connection>
+        <Source node="node_49" param="output" />
+        <Target node="node_63" param="input" />
+      </Connection>
+      <Connection>
+        <Source node="node_44" param="output" />
+        <Target node="node_66" param="input" />
+      </Connection>
+      <Connection>
+        <Source node="node_53" param="output" />
+        <Target node="node_57" param="input" />
+      </Connection>
+      <Connection>
+        <Source node="node_63" param="output" />
+        <Target node="node_52" param="a" />
+      </Connection>
+      <Connection>
+        <Source node="node_66" param="output" />
+        <Target node="node_52" param="b" />
+      </Connection>
+      <Connection>
+        <Source node="node_52" param="output" />
+        <Target node="node_67" param="a" />
+      </Connection>
+      <Connection>
+        <Source node="node_57" param="output" />
+        <Target node="node_67" param="b" />
+      </Connection>
+      <Connection>
+        <Source node="node_67" param="output" />
+        <Target node="node_60" param="input" />
+      </Connection>
+      <Connection>
+        <Source node="node_56" param="output" />
+        <Target node="node_45" param="input" />
+      </Connection>
+      <Connection>
+        <Source node="node_45" param="output" />
+        <Target node="node_61" param="input" />
+      </Connection>
+      <Connection>
+        <Source node="node_50" param="output" />
+        <Target node="node_65" param="a" />
+      </Connection>
+      <Connection>
+        <Source node="node_45" param="output" />
+        <Target node="node_50" param="input" />
+      </Connection>
+      <Connection>
+        <Source node="node_65" param="output" />
+        <Target node="node_64" param="i1" />
+      </Connection>
+      <Connection>
+        <Source node="node_38" param="Accel" />
+        <Target node="node_49" param="input" />
+      </Connection>
+      <Connection>
+        <Source node="node_38" param="Accel" />
+        <Target node="node_44" param="input" />
+      </Connection>
+      <Connection>
+        <Source node="node_38" param="Accel" />
+        <Target node="node_53" param="input" />
+      </Connection>
+      <Connection>
+        <Source node="node_60" param="output" />
+        <Target node="node_68" param="input" />
+      </Connection>
+      <Connection>
+        <Source node="node_68" param="output" />
+        <Target node="node_56" param="input" />
+      </Connection>
+      <Connection>
+        <Source node="node_45" param="output" />
+        <Target node="node_69" param="a" />
+      </Connection>
+      <Connection>
+        <Source node="node_45" param="output" />
+        <Target node="node_69" param="b" />
+      </Connection>
+      <Connection>
+        <Source node="node_69" param="output" />
+        <Target node="node_70" param="input" />
+      </Connection>
+      <Connection>
+        <Source node="node_70" param="output" />
+        <Target node="node_71" param="input" />
+      </Connection>
+      <Connection>
+        <Source node="node_71" param="output" />
+        <Target node="node_65" param="b" />
+      </Connection>
+      <Connection>
+        <Source node="node_61" param="output" />
+        <Target node="node_72" param="input" />
+      </Connection>
+      <Connection>
+        <Source node="node_61" param="output" />
+        <Target node="node_73" param="input" />
+      </Connection>
+      <Connection>
+        <Source node="node_75" param="output" />
+        <Target node="node_74" param="a" />
+      </Connection>
+      <Connection>
+        <Source node="node_76" param="output" />
+        <Target node="node_74" param="b" />
+      </Connection>
+      <Connection>
+        <Source node="node_74" param="output" />
+        <Target node="node_77" param="input" />
+      </Connection>
+      <Connection>
+        <Source node="node_73" param="output" />
+        <Target node="node_79" param="input" />
+      </Connection>
+      <Connection>
+        <Source node="node_72" param="output" />
+        <Target node="node_78" param="input" />
+      </Connection>
+      <Connection>
+        <Source node="node_78" param="output" />
+        <Target node="node_75" param="input" />
+      </Connection>
+      <Connection>
+        <Source node="node_79" param="output" />
+        <Target node="node_76" param="input" />
+      </Connection>
+      <Connection>
+        <Source node="node_86" param="output" />
+        <Target node="node_58" param="data" />
+      </Connection>
+      <Connection>
+        <Source node="node_70" param="output" />
+        <Target node="node_64" param="i0" />
+      </Connection>
+      <Connection>
+        <Source node="node_64" param="output" />
+        <Target node="node_86" param="i0" />
+      </Connection>
+      <Connection>
+        <Source node="node_77" param="output" />
+        <Target node="node_90" param="input" />
+      </Connection>
+      <Connection>
+        <Source node="node_90" param="output" />
+        <Target node="node_86" param="i1" />
+      </Connection>
+    </Connections>
+  </Compound>
+</Imaginet>

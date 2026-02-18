@@ -1,0 +1,8 @@
+Time(Seconds),Length(Seconds),Label(string),Confidence(double),Comment(string)
+2.4610209000000003,40.8844444,working,1,
+48.4323994,9.3026267,working,1,
+61.7721707,8.9884304,working,1,
+73.3487573,9.2241149,working,1,
+86.3591098,9.126285,working,1,
+98.0846829,23.0861469,working,1,
+122.0721094,17.8622002,working,1,
