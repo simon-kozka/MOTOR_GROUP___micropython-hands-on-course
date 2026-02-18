@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ImagimobStudio version="0.9">
+  <Timeline id="b3cc6375-50e2-4e93-84b9-7ab8c9593f3c">
+    <Tracks>
+      <Track name="Microphone Data" type="audiowav" isLabelTrack="False">
+        <PayloadFile>Microphone-Data.wav</PayloadFile>
+        <Shape>
+          <Axis name="Audio" size="1">
+            <Label index="0">Mono</Label>
+          </Axis>
+        </Shape>
+      </Track>
+      <Track name="Live Labeling" type="labelcsv">
+        <PayloadFile>Live-Labeling.label</PayloadFile>
+        <Shape>
+          <Axis name="Labels" size="2">
+            <Label index="0">working</Label>
+            <Label index="1">impact</Label>
+          </Axis>
+        </Shape>
+      </Track>
+    </Tracks>
+  </Timeline>
+</ImagimobStudio>
