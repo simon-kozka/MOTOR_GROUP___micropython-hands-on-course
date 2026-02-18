@@ -1,2 +1,2 @@
 Time(Seconds),Length(Seconds),Label(string),Confidence(double),Comment(string)
-0.005255199999993684,200.87316140000001,imbalance,1,
+0.005255199999993684,200.8722127,imbalance,1,

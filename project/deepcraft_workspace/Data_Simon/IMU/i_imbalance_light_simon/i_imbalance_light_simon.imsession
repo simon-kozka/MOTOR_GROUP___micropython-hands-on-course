@@ -18,7 +18,11 @@
       </Track>
       <Track name="Live Labeling" type="labelcsv">
         <PayloadFile>Live-Labeling.label</PayloadFile>
-        <Shape />
+        <Shape>
+          <Axis name="Labels" size="1">
+            <Label index="0">imbalance</Label>
+          </Axis>
+        </Shape>
       </Track>
     </Tracks>
   </Timeline>

@@ -1,6 +1,5 @@
 Time(Seconds),Length(Seconds),Label(string),Confidence(double),Comment(string)
 0.004995899999999987,3.9955369999999997,working,1,
-0.2414547,2.0762711,working,1,
 4.001472,0.2566344000000002,impact,1,
 4.8479351,2.4611719,working,1,
 7.3173484,0.5043422000000002,impact,1,
@@ -127,4 +126,4 @@ Time(Seconds),Length(Seconds),Label(string),Confidence(double),Comment(string)
 186.8949752,0.6578998,working,1,
 188.378423,1.460477,working,1,
 189.8416008,0.1733165000000012,impact,1,
-192.7422759,2.6172762,working,1,
+192.7422759,2.6151675,working,1,
