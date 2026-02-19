@@ -45,6 +45,7 @@ def Get_Status () :
 
 def main():
     Intialize_Model();
+    time.sleep(2)
     Get_Status();
             
 
