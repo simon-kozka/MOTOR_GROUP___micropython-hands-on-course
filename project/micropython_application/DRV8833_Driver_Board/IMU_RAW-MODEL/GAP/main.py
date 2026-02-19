@@ -5,17 +5,8 @@ print("Device Booted Succesfully.")
 import gc
 import time
 from machine import I2C, Pin, PWM
-from micropython_bmi270 import bmi270
 import machine
 from machine import PDM_PCM, freq, AUDIO_PDM_24_576_000_HZ
-
-#Initializing I2C
-i2c = I2C(scl='P0_2', sda='P0_3') 
-
-#Initialising IMU
-def IMU_Config () :
-    global bmi; bmi = bmi270.BMI270(i2c)
-    bmi.acceleration_range = bmi270.ACCEL_RANGE_2G
 
 import deepcraft_model
 import array
@@ -37,8 +28,8 @@ def Get_Status () :
     print("Getting current status...")
     output_buffer = array.array('f', [0.0] * len(IMAI_DATA_OUT_SYMBOLS))
     for i in range (0, 2000) :
-        accx, accy, accz = bmi.acceleration
-        gyrox, gyroy, gyroz = bmi.gyro
+        accx, accy, accz = [0, 0, 0]
+        gyrox, gyroy, gyroz = [1, 2, 3]
         print("loading batch...")
         model.enqueue([accx, accy, accz, gyrox, gyroy, gyroz]);
         print(f"batch loaded {i}")
@@ -53,8 +44,6 @@ def Get_Status () :
 
 
 def main():
-    IMU_Config();
-    machine.freq(machine.AUDIO_PDM_24_576_000_HZ)
     Intialize_Model();
     Get_Status();
             
