@@ -2,9 +2,9 @@
 * ImagiNet Compiler 5.8.4292+50129d917517243fc033cba30ce355705c84a08c
 * Copyright © 2023- Imagimob AB, All Rights Reserved.
 * 
-* Generated at 02/18/2026 15:38:25 UTC. Any changes will be lost.
+* Generated at 02/17/2026 18:18:52 UTC. Any changes will be lost.
 * 
-* Model ID  ff1a488a-dba2-4122-9d8a-168a6340f7bb
+* Model ID  b7731607-22b0-4c5d-ad13-e942ff5e2c89
 * 
 * Memory    Size                      Efficiency
 * Buffers   19200 bytes (RAM)         100 %
@@ -30,7 +30,7 @@
 *  int IMAI_dequeue(float *dataout);
 * 
 *  @description: Try write data to model.
-*  @param datain Input features. Input float[2,3].
+*  @param datain Input features. Input float[6].
 *  @return IPWIN_RET_SUCCESS (0) or IPWIN_RET_NODATA (-1), IPWIN_RET_ERROR (-2), IPWIN_RET_STREAMEND (-3)
 *  int IMAI_enqueue(const float *datain);
 * 
@@ -6889,10 +6889,12 @@ int IMAI_dequeue(float *restrict dataout) {
 /*
 * Try write data to model.
 * 
-*  @param datain Input features. Input float[2,3].
+*  @param datain Input features. Input float[6].
 *  @return IPWIN_RET_SUCCESS (0) or IPWIN_RET_NODATA (-1), IPWIN_RET_ERROR (-2), IPWIN_RET_STREAMEND (-3)
 */
 int IMAI_enqueue(const float *restrict datain) {    
+    for(int i = 0; i < 255; i++) {
+    }
     __RETURN_ERROR(fixwin_enqueue(_K2, datain));
     return 0;
 }
@@ -6914,7 +6916,7 @@ void IMAI_init(void) {
 
 static IMAI_api_def _IMAI_api_def = {
     .api_ver = 1,
-    .id = {0x8a, 0x48, 0x1a, 0xff, 0xa2, 0xdb, 0x22, 0x41, 0x9d, 0x8a, 0x16, 0x8a, 0x63, 0x40, 0xf7, 0xbb},
+    .id = {0x07, 0x16, 0x73, 0xb7, 0xb0, 0x22, 0x5d, 0x4c, 0xad, 0x13, 0xe9, 0x42, 0xff, 0x5e, 0x2c, 0x89},
     .api_type = IMAI_API_TYPE_QUEUE,
     .prefix = "IMAI_",
     .buffer_mem = {
@@ -6968,17 +6970,11 @@ static IMAI_api_def _IMAI_api_def = {
                 {
                     .name = "datain",
                     .attrib = IMAI_PARAM_INPUT,
-                    .rank = 2,
+                    .rank = 1,
                     .shape = (IMAI_shape_dim[]) {
                         {
-                            .name = "Axis",
-                            .size = 3,
-                            .labels = (label_text_t[]) { "X","Y","Z" },
-                        },
-                        {
-                            .name = "Sensor",
-                            .size = 2,
-                            .labels = (label_text_t[]) { "Accel","Gyro" },
+                            .name = "",
+                            .size = 6,
                         },
                     },
                     .count = 6,

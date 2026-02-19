@@ -2,43 +2,33 @@
 * ImagiNet Compiler 5.8.4292+50129d917517243fc033cba30ce355705c84a08c
 * Copyright © 2023- Imagimob AB, All Rights Reserved.
 * 
-* Generated at 02/18/2026 15:38:25 UTC. Any changes will be lost.
+* Generated at 02/18/2026 15:46:26 UTC. Any changes will be lost.
 * 
-* Model ID  ff1a488a-dba2-4122-9d8a-168a6340f7bb
+* Model ID  0517883c-7c3a-4369-a68d-01ff31681b2d
 * 
 * Memory    Size                      Efficiency
-* Buffers   19200 bytes (RAM)         100 %
-* State     5008 bytes (RAM)          100 %
-* Readonly  204176 bytes (Flash)      100 %
-* 
-* Backend              tensorflow
-* Keras Version        2.15.0
-* Backend Model Type   Sequential
-* Backend Model Name   conv1d-small-balanced-0
-* 
-* Class Index | Symbol Label
-* 0           | (unlabeled)
-* 1           | imbalance
-* 2           | working
-* 3           | impact
+* Buffers   4800 bytes (RAM)          100 %
+* State     29600 bytes (RAM)         100 %
+* Readonly  208364 bytes (Flash)      100 %
 * 
 * Exported functions:
 * 
 *  @description: Try read data from model.
-*  @param dataout Output Features. Output float[4].
+*  @param data_out Output features. Output float[4].
 *  @return IPWIN_RET_SUCCESS (0) or IPWIN_RET_NODATA (-1), IPWIN_RET_ERROR (-2), IPWIN_RET_STREAMEND (-3)
-*  int IMAI_dequeue(float *dataout);
+*  int IMAI_dequeue(float *data_out);
 * 
 *  @description: Try write data to model.
-*  @param datain Input features. Input float[2,3].
+*  @param data_in Input features. Input float[6].
 *  @return IPWIN_RET_SUCCESS (0) or IPWIN_RET_NODATA (-1), IPWIN_RET_ERROR (-2), IPWIN_RET_STREAMEND (-3)
-*  int IMAI_enqueue(const float *datain);
+*  int IMAI_enqueue(const float *data_in);
 * 
 *  @description: Closes and flushes streams, free any heap allocated memory.
 *  void IMAI_finalize(void);
 * 
 *  @description: Initializes buffers to initial state.
-*  void IMAI_init(void);
+*  @return IPWIN_RET_SUCCESS (0) or IPWIN_RET_NODATA (-1), IPWIN_RET_ERROR (-2), IPWIN_RET_STREAMEND (-3)
+*  int IMAI_init(void);
 * 
 * 
 * Disclaimer:
@@ -47,10 +37,20 @@
 *   This can only be done if the functions are inlined and simplified.
 *   Check disassembly if unsure.
 *   tl;dr Compile using gcc with -O3 or -Ofast
+* 
+* Notes:
+* 	-> This code was generated with DEEPCRAFT Studio using:
+* 		ml-coretools 3.0.1.9035.
+* 		tensorflow 2.19.0.
+* 	-> This code requires the following Modus Toolbox libraries (add them to your
+* 	project using the Library Manager):
+* 		ml-middleware 3.0.1.
+* 		ml-tflite-micro 3.0.1.
 */
 
 #include <stdbool.h>
 #include <stdint.h>
+#include "mtb_ml_model.h"
 #define IMAI_API_QUEUE
 
 typedef int8_t q7_t;         // 8-bit fractional data type in Q1.7 format.
@@ -58,11 +58,8 @@ typedef int16_t q15_t;       // 16-bit fractional data type in Q1.15 format.
 typedef int32_t q31_t;       // 32-bit fractional data type in Q1.31 format.
 typedef int64_t q63_t;       // 64-bit fractional data type in Q1.63 format.
 
-// All symbols in order
-#define IMAI_SYMBOL_MAP {"(unlabeled)", "imbalance", "working", "impact"}
-
 // Model GUID (16 bytes)
-#define IMAI_MODEL_ID {0x8a, 0x48, 0x1a, 0xff, 0xa2, 0xdb, 0x22, 0x41, 0x9d, 0x8a, 0x16, 0x8a, 0x63, 0x40, 0xf7, 0xbb}
+#define IMAI_MODEL_ID {0x3c, 0x88, 0x17, 0x05, 0x3a, 0x7c, 0x69, 0x43, 0xa6, 0x8d, 0x01, 0xff, 0x31, 0x68, 0x1b, 0x2d}
 
 
 // First nibble is bit encoding, second nibble is number of bytes
@@ -86,29 +83,29 @@ typedef int64_t q63_t;       // 64-bit fractional data type in Q1.63 format.
 #define IMAGINET_TYPES_UINT32	(0x74)
 #define IMAGINET_TYPES_UINT64	(0x78)
 
-// dataout [4] (16 bytes)
-#define IMAI_DATAOUT_RANK (1)
-#define IMAI_DATAOUT_SHAPE (((int[]){4})
-#define IMAI_DATAOUT_COUNT (4)
-#define IMAI_DATAOUT_TYPE float
-#define IMAI_DATAOUT_TYPE_ID IMAGINET_TYPES_FLOAT32
-#define IMAI_DATAOUT_SHIFT 0
-#define IMAI_DATAOUT_OFFSET 0
-#define IMAI_DATAOUT_SCALE 1
-#define IMAI_DATAOUT_SYMBOLS {"unlabeled}", "imbalance", "working", "impact"}
+// data_out [4] (16 bytes)
+#define IMAI_DATA_OUT_RANK (1)
+#define IMAI_DATA_OUT_SHAPE (((int[]){4})
+#define IMAI_DATA_OUT_COUNT (4)
+#define IMAI_DATA_OUT_TYPE float
+#define IMAI_DATA_OUT_TYPE_ID IMAGINET_TYPES_FLOAT32
+#define IMAI_DATA_OUT_SHIFT 0
+#define IMAI_DATA_OUT_OFFSET 0
+#define IMAI_DATA_OUT_SCALE 0
+#define IMAI_DATA_OUT_SYMBOLS {"{unlabeled}", "imbalance", "working", "impact"}
 
-// datain [2,3] (24 bytes)
-#define IMAI_DATAIN_RANK (2)
-#define IMAI_DATAIN_SHAPE (((int[]){3, 2})
-#define IMAI_DATAIN_COUNT (6)
-#define IMAI_DATAIN_TYPE float
-#define IMAI_DATAIN_TYPE_ID IMAGINET_TYPES_FLOAT32
-#define IMAI_DATAIN_SHIFT 0
-#define IMAI_DATAIN_OFFSET 0
-#define IMAI_DATAIN_SCALE 1
-#define IMAI_DATAIN_SYMBOLS {"X", "Y", "Z"}
+// data_in [6] (24 bytes)
+#define IMAI_DATA_IN_RANK (1)
+#define IMAI_DATA_IN_SHAPE (((int[]){6})
+#define IMAI_DATA_IN_COUNT (6)
+#define IMAI_DATA_IN_TYPE float
+#define IMAI_DATA_IN_TYPE_ID IMAGINET_TYPES_FLOAT32
+#define IMAI_DATA_IN_SHIFT 0
+#define IMAI_DATA_IN_OFFSET 0
+#define IMAI_DATA_IN_SCALE 1
+#define IMAI_DATA_IN_SYMBOLS { }
 
-#define IMAI_KEY_MAX (24)
+#define IMAI_KEY_MAX (7)
 
 // Return codes
 #define IMAI_RET_SUCCESS 0
@@ -122,15 +119,37 @@ typedef int64_t q63_t;       // 64-bit fractional data type in Q1.63 format.
 #define IPWIN_RET_STREAMEND -3
 
 // Exported methods
-int IMAI_dequeue(float *restrict dataout);
-int IMAI_enqueue(const float *restrict datain);
+int IMAI_dequeue(float *restrict data_out);
+int IMAI_enqueue(const float *restrict data_in);
 void IMAI_finalize(void);
-void IMAI_init(void);
+int IMAI_init(void);
+
+// Implement this method to perform profiling	
+void IMAI_hook_region(bool entered, int32_t region_id);
+
+// Symbol IMAI_PROFILING must be defined to enable profiling of models
+void IMAI_mtb_models_profile_log();
+void IMAI_mtb_models_print_info();
+#define IMAI_MAX_MTB_MODELS 4
+extern int32_t IMAI_mtb_models_count;
+extern mtb_ml_model_t* IMAI_mtb_models[IMAI_MAX_MTB_MODELS];
 
 // Profiling regions
-#define IMAI_REGIONS_COUNT 0
-#define IMAI_REGIONS_NAMES {}
-typedef enum {IMAI_REGIONS_EMPTY} IMAI_Region_t;
+#ifdef IMAI_PROFILING
+    #define IMAI_REGIONS_COUNT 2
+    #define IMAI_REGIONS_NAMES {\
+    	"PREPROCESSOR",\
+    	"NETWORK",\
+    }
+    typedef enum {
+    	IMAI_PREPROCESSOR = 0,
+    	IMAI_NETWORK = 1,
+    } IMAI_Region_t;
+#else
+    #define IMAI_REGIONS_COUNT 0
+    #define IMAI_REGIONS_NAMES {}
+    typedef enum {IMAI_REGIONS_EMPTY} IMAI_Region_t;
+#endif
 
 typedef enum {
     IMAI_PARAM_UNDEFINED = 0,

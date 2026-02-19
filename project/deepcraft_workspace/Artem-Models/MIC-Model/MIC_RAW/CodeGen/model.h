@@ -2,9 +2,9 @@
 * ImagiNet Compiler 5.8.4292+50129d917517243fc033cba30ce355705c84a08c
 * Copyright © 2023- Imagimob AB, All Rights Reserved.
 * 
-* Generated at 02/18/2026 15:38:25 UTC. Any changes will be lost.
+* Generated at 02/17/2026 18:18:52 UTC. Any changes will be lost.
 * 
-* Model ID  ff1a488a-dba2-4122-9d8a-168a6340f7bb
+* Model ID  b7731607-22b0-4c5d-ad13-e942ff5e2c89
 * 
 * Memory    Size                      Efficiency
 * Buffers   19200 bytes (RAM)         100 %
@@ -30,7 +30,7 @@
 *  int IMAI_dequeue(float *dataout);
 * 
 *  @description: Try write data to model.
-*  @param datain Input features. Input float[2,3].
+*  @param datain Input features. Input float[6].
 *  @return IPWIN_RET_SUCCESS (0) or IPWIN_RET_NODATA (-1), IPWIN_RET_ERROR (-2), IPWIN_RET_STREAMEND (-3)
 *  int IMAI_enqueue(const float *datain);
 * 
@@ -62,7 +62,7 @@ typedef int64_t q63_t;       // 64-bit fractional data type in Q1.63 format.
 #define IMAI_SYMBOL_MAP {"(unlabeled)", "imbalance", "working", "impact"}
 
 // Model GUID (16 bytes)
-#define IMAI_MODEL_ID {0x8a, 0x48, 0x1a, 0xff, 0xa2, 0xdb, 0x22, 0x41, 0x9d, 0x8a, 0x16, 0x8a, 0x63, 0x40, 0xf7, 0xbb}
+#define IMAI_MODEL_ID {0x07, 0x16, 0x73, 0xb7, 0xb0, 0x22, 0x5d, 0x4c, 0xad, 0x13, 0xe9, 0x42, 0xff, 0x5e, 0x2c, 0x89}
 
 
 // First nibble is bit encoding, second nibble is number of bytes
@@ -97,16 +97,16 @@ typedef int64_t q63_t;       // 64-bit fractional data type in Q1.63 format.
 #define IMAI_DATAOUT_SCALE 1
 #define IMAI_DATAOUT_SYMBOLS {"unlabeled}", "imbalance", "working", "impact"}
 
-// datain [2,3] (24 bytes)
-#define IMAI_DATAIN_RANK (2)
-#define IMAI_DATAIN_SHAPE (((int[]){3, 2})
+// datain [6] (24 bytes)
+#define IMAI_DATAIN_RANK (1)
+#define IMAI_DATAIN_SHAPE (((int[]){6})
 #define IMAI_DATAIN_COUNT (6)
 #define IMAI_DATAIN_TYPE float
 #define IMAI_DATAIN_TYPE_ID IMAGINET_TYPES_FLOAT32
 #define IMAI_DATAIN_SHIFT 0
 #define IMAI_DATAIN_OFFSET 0
 #define IMAI_DATAIN_SCALE 1
-#define IMAI_DATAIN_SYMBOLS {"X", "Y", "Z"}
+#define IMAI_DATAIN_SYMBOLS { }
 
 #define IMAI_KEY_MAX (24)
 

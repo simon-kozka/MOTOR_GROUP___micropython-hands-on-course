@@ -7,9 +7,9 @@
     </Options>
     <CodeGenerationParams>
       <Unit id="d419d86b-7b57-41d3-9a74-ab428f13a213">
-        <Input>node_4</Input>
+        <Input>node_3</Input>
         <Output>node_6</Output>
-        <Platform>GenericC99</Platform>
+        <Platform>InfineonPsoc6</Platform>
         <OutputFileName>model</OutputFileName>
         <OutputDirectory>CodeGen</OutputDirectory>
         <CPrefix>IMAI_</CPrefix>

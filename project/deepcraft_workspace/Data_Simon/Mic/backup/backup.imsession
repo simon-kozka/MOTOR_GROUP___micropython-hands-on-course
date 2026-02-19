@@ -10,6 +10,10 @@
           </Axis>
         </Shape>
       </Track>
+      <Track name="backup_Microphone-Data" type="audiowav" isLabelTrack="False">
+        <PayloadFile>backup_Microphone-Data.wav</PayloadFile>
+        <Shape />
+      </Track>
       <Track name="Live Labeling" type="labelcsv">
         <PayloadFile>Live-Labeling.label</PayloadFile>
         <Shape>

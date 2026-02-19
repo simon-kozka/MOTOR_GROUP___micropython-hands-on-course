@@ -12,7 +12,10 @@ from machine import PDM_PCM, freq, AUDIO_PDM_24_576_000_HZ
 i2c = I2C(scl='P0_2', sda='P0_3') 
 
 #Initialising IMU
-bmi = bmi270.BMI270(i2c)
+def IMU_Config () :
+    global bmi; bmi = bmi270.BMI270(i2c)
+    bmi.acceleration_range = bmi270.ACCEL_RANGE_2G
+
 #print(gc.mem_free() - a)
 
 #Mic Config code taken from Material Detection Exmaple
@@ -124,23 +127,39 @@ import deepcraft_model
 import array
 
 def Intialize_Model ():
-    global IMAI_DATA_OUT_SYMBOLS; IMAI_DATA_OUT_SYMBOLS = ['unlabelled', 'working', 'impact', 'imbalance']
+    print("Initializing Model....")
+    global IMAI_DATA_OUT_SYMBOLS; IMAI_DATA_OUT_SYMBOLS = ['unlabelled', 'imbalance', 'working', 'impact']
     global model; model = deepcraft_model.DEEPCRAFT()
     model.init()
     global input_dim; input_dim = model.get_model_input_dim()
     global output_dim; output_dim = model.get_model_output_dim()
+    print (f"input_dim = {input_dim}; output_dim = {output_dim}")
+    global output_buffer; output_buffer = array.array('f', [0.0] * len(IMAI_DATA_OUT_SYMBOLS))
+    print("Model Initialized Succesfuly")
+    
+
 
 def Get_Status () :
+    print("Getting current status...")
+    for i in range (0, 2000) :
+        accx, accy, accz = bmi.acceleration
+        gyrox, gyroy, gyroz = bmi.gyro
+        model.enqueue([accx, accy, accz, gyrox, gyroy, gyroz]);
+    output_status = model.dequeue(output_buffer)
+    print(output_buffer)
     return 4
 
 
 def main():
-    Intialize_Model ()
+    IMU_Config();
     PWM_Config ()
     machine.freq(machine.AUDIO_PDM_24_576_000_HZ)
-    for i in range (0, 2) :
+    Intialize_Model();
+    
+    for i in range (0, 6) :
         time.sleep_ms(1000)
         status = Get_Status()
+        continue
         if status == 0 : #unlabled
             print("Motor is NOT spinnig")
         if status == 1 :
@@ -159,13 +178,13 @@ def main():
         if status == 5 :
                 print("ERROR : UNKNOWN STATUS LABEL")
             
-    output_buffer = array.array('f', [0.0] * len(IMAI_DATA_OUT_SYMBOLS))
-    print(output_buffer)
+
 
 
 if __name__ == "__main__":
     main()
-    Stop_Motor()
+    Motor_Stop()
+    print("program stopped")
 
 
 
