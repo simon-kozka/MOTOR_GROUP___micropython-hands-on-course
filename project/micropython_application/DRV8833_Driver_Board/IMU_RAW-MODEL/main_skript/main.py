@@ -1,6 +1,3 @@
-print("Device Booted Succesfully.")
-print("Press the Button to start a Program")
-
 import gc
 import time
 from machine import I2C, Pin, PWM
@@ -10,6 +7,9 @@ from machine import PDM_PCM, freq, AUDIO_PDM_24_576_000_HZ
 
 #Initializing I2C
 i2c = I2C(scl='P0_2', sda='P0_3') 
+
+
+
 
 #Initialising IMU
 def IMU_Config () :
@@ -53,15 +53,6 @@ def sample_normalize(sample):
     return sample / float(1 << (AUDIO_BITS_PER_SAMPLE - 1))
 
 
-user_button = Pin('P5_2', Pin.IN, Pin.PULL_UP)
-
-def reboot_handler(pin):
-    print("\n[BUTTON PRESSED] Rebooting board...")
-    time.sleep(0.1) # Debounce
-    machine.soft_reset()
-
-# Attach the interrupt: trigger when the button is pressed (falling edge)
-user_button.irq(trigger=Pin.IRQ_FALLING, handler=reboot_handler)
 
 
 
@@ -78,7 +69,7 @@ def PWM_Config ():
 
 
 # Defining Basic Control Functions
-def Set_Speed (speed) :
+def Motor_Set_Speed (speed) :
     if (speed <= 0 and speed >= -100) :
         duty = int((-speed * 65535) / 100)
         dir_pin1.duty_u16(duty)
@@ -96,32 +87,16 @@ def Set_Speed (speed) :
     dir_pin2.duty_u16(0)
     print("ERROR : Illegal speed given")
         
-
 def Motor_Stop():
     dir_pin1.duty_u16(0)
     dir_pin2.duty_u16(0)
     print("Motor Stopped")
-
-
 
 def Motor_Hard_Break():
     """Hard Braking. stops instantly."""
     dir_pin1.duty_u16(1)
     dir_pin2.duty_u16(1)
     print("Motor Hard Braking")
-
-# Complex Routines
-def Motor_Self_Clean () :
-    for i in range (0, 2) :
-        Set_Speed(50);
-        time.sleep_ms(2000);
-        Motor_Stop()
-        time.sleep_ms(2000);
-        Set_Speed(-50);
-        time.sleep_ms(2000);
-        Motor_Stop();
-        time.sleep_ms(2000);
-
 
 import deepcraft_model
 import array
@@ -138,55 +113,98 @@ def Intialize_Model ():
     print("Model Initialized Succesfuly")
     
 
+#1. prediction rate is 10 hz. with [20, 6] window, 200 hz sampling is needed
+#
+accx = 0; accy = 0; accz = 0;
+gyrox = 0; gyroy = 0; gyroz = 0;
+SAMPLING_FREQ = 200 
+INTERVAL_US = 1000000 // SAMPLING_FREQ  # 100000 us (1s)
 
-def Get_Status () :
-    print("Getting current status...")
-    for i in range (0, 2000) :
-        accx, accy, accz = bmi.acceleration
-        gyrox, gyroy, gyroz = bmi.gyro
-        print([accx, accy, accz, gyrox, gyroy, gyroz])
-        model.enqueue([accx, accy, accz, gyrox, gyroy, gyroz]);
+input_buffer = array.array('f', [0.0] * 6)
+next_sample_time = 0
+def Get_Status():
+    # 2. Local "Cache" of the sensor methods (Faster lookup)
+    global next_sample_time
+    for i in range(20):
+        # 3. This creates a tuple (Temporary garbage, but small)
+        next_sample_time = time.ticks_add(time.ticks_us(), INTERVAL_US)
+        a = bmi.acceleration
+        g = bmi.gyro
+        
+        # 4. Fill the pre-allocated buffer (Zero new RAM used here!)
+        input_buffer[0] = a[0]
+        input_buffer[1] = a[1]
+        input_buffer[2] = a[2]
+        input_buffer[3] = g[0]
+        input_buffer[4] = g[1]
+        input_buffer[5] = g[2]
+        
+        # 5. Enqueue the SAME buffer
+        model.enqueue(input_buffer) 
+        
+        time.sleep_us(time.ticks_diff(next_sample_time, time.ticks_us()))
+
+    # 6. Force clean the sensor tuples after the loop
+    gc.collect()
     output_status = model.dequeue(output_buffer)
-    print(output_buffer)
-    return 4
+    
+    #print("labels : ", output_buffer)
+    # Ultra-fast manual check for 4 elements
+    m = 0
+    if output_buffer[1] > output_buffer[m]: m = 1
+    if output_buffer[2] > output_buffer[m]: m = 2
+    if output_buffer[3] > output_buffer[m]: m = 3
+    # m is now the index of the maximum float
+    return m
 
-
-def main():
+def Init_and_Config () :
+    print ("Configuring the Device...")
     IMU_Config();
     PWM_Config ()
     machine.freq(machine.AUDIO_PDM_24_576_000_HZ)
     Intialize_Model();
+    print("Device Configured Succesfully")
     
-    for i in range (0, 6) :
-        time.sleep_ms(1000)
+def main():
+    print("Starting Main Program...")
+    Motor_Set_Speed(100)
+    time.sleep(4)
+    count = 0
+    for i in range (0, 10000) :
+        #time.sleep_ms(1000)
+        #print("Free RAM:", gc.mem_free())
         status = Get_Status()
-        continue
-        if status == 0 : #unlabled
-            print("Motor is NOT spinnig")
-        if status == 1 :
-            print("Motor is working normally")
-        if status == 2 : #impact
-            print("Motor HIT something")
-        if status == 3 : #imbalanced
-            print("Motor is UNBALANCED")
-            print("Stopping the Motor")
-        if status == 4 : #blocked
-            print("Motor is BLOCKED")
-            print("Starting Cleaning Routine")
-            Motor_Self_Clean()
-            if(Get_Status() == 4) :
-                print("Cleaning FAILED\nStopping the Motor")
-        if status == 5 :
-                print("ERROR : UNKNOWN STATUS LABEL")
+        count += 1
             
+        if status == 3 : #impact
+            Motor_Hard_Break()
+            print("Motor HIT something")
+            print("EMERGENCY STOP")
+            break
+        elif count > 13 :
+            count = 0
+            if status == 0 : #unlabled
+                print("Motor is NOT spinnig")
+            elif status == 1 : #imbalanced
+                #Motor_Stop()
+                print("Motor is UNBALANCED")
+                #print("Stopping the Motor")
+            elif status == 2 :
+                print("Motor is working normally")
+                
+    print ("Main Program Ended. Press USER to SystemExit Program again or Press RESET to Reset")   
 
+user_button = Pin('P5_2', Pin.IN, Pin.PULL_UP)
+is_running = 0
+def USER_Button_handler(pin):
+    main()
 
+# Attach the interrupt: trigger when the button is pressed (falling edge)
+user_button.irq(trigger=Pin.IRQ_FALLING, handler=USER_Button_handler)
 
 if __name__ == "__main__":
-    main()
-    Motor_Stop()
-    print("program stopped")
-
-
-
-
+    print("Device Booted Succesfully.")
+    Init_and_Config()
+    print("Press USER to start the Main Program")
+    while 3 > 2 :
+        pass

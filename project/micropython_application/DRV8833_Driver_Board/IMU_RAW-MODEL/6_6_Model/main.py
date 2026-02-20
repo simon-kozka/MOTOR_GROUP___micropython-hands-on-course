@@ -26,12 +26,12 @@ def Intialize_Model ():
 
 def Get_Status () :
     print("Getting current status...")
-    output_buffer = array.array('f', [0.0] * len(IMAI_DATA_OUT_SYMBOLS))
+    output_buffer = array.array('f', [0.0] * output_dim)
     for i in range (0, 24) :
-        accx, accy, accz = [0, 2, 0]
-        gyrox, gyroy, gyroz = [1, 4, 3]
+        accx, accy, accz = [0, 1, 3]
+        gyrox, gyroy, gyroz = [0, 0, 0]
         print("loading batch...")
-        model.enqueue([accx, accy, accz, gyrox, gyroy, gyroz]);
+        model.enqueue(array.array('f', [accx, accy, accz, gyrox, gyroy, gyroz]));
         print(f"batch loaded {i}")
         output_status = model.dequeue(output_buffer)
         print(output_status)

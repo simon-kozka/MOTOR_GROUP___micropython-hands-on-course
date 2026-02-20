@@ -4,6 +4,7 @@
     <Tracks>
       <Track name="IMU-Data" type="datacsv" isLabelTrack="False">
         <PayloadFile>IMU-Data.data</PayloadFile>
+        <Shape />
       </Track>
       <Track name="Microphone Data" type="audiowav" isLabelTrack="False">
         <PayloadFile>Microphone-Data.wav</PayloadFile>

@@ -158,8 +158,7 @@ def main():
     
     for i in range (0, 6) :
         time.sleep_ms(1000)
-        status = Get_Status()
-        continue
+        status = 4
         if status == 0 : #unlabled
             print("Motor is NOT spinnig")
         if status == 1 :
