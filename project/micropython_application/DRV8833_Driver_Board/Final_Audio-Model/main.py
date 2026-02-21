@@ -12,15 +12,16 @@ def Mic_Config () :
     SAMPLE_RATE_HZ = 16000  # Desired sample rate in Hz
     AUDIO_BUFFER_SIZE = 512  # Size of the audio buffer
     global AUDIO_BITS_PER_SAMPLE; AUDIO_BITS_PER_SAMPLE = 16  # Dynamic range in bits
-    MICROPHONE_GAIN = 12  # Microphone gain setting(best prediction observed at 12)
-    DIGITAL_BOOST_FACTOR = 50.0  # Digital boost factor for input signal
-    IMAI_DATA_OUT_SYMBOLS = ["unlabelled", "air", "plastic", "plastic_out", "wood", "wood_out"]
-
+    MICROPHONE_GAIN = 10  # Microphone gain setting(best prediction observed at 12)
+    global DIGITAL_BOOST_FACTOR; DIGITAL_BOOST_FACTOR = 50.0  # Digital boost factor for input signal
+    
+    
+    
     # PDM_PCM configuration
     clk_pin = "P10_4"
     data_pin = "P10_5"
-    rx_buf = array.array('h', [0] * AUDIO_BUFFER_SIZE)
-    
+    global rx_buf;  rx_buf = array.array('h', [0] * AUDIO_BUFFER_SIZE)
+
     print("PDM initializing....")
     global pdm_pcm; pdm_pcm = PDM_PCM(
         0,
@@ -104,12 +105,11 @@ def Init_and_Config () :
     Intialize_Model();
     Mic_Config()
     print("Device Configured Succesfully")
-    
+count = 0  
 def main():
     print("Starting Main Program...")
-    time.sleep(4)
-    count = 0
-    for i in range (0, 10):
+    global count
+    for i in range (0, 1000):
         
         num = pdm_pcm.readinto(rx_buf)
 
@@ -117,38 +117,39 @@ def main():
         audio_count = num // 2
 
         for i in range(audio_count):
+        
             # Get sample from rx_buf
-            raw_sample = rx_buf[i]* DIGITAL_BOOST_FACTOR
+            raw_sample = rx_buf[i]
 
             # Normalize the sample to range [-1, 1]
-            normalized_sample = sample_normalize(raw_sample)
+            #normalized_sample = sample_normalize(raw_sample)
 
             # Apply digital boost factor
-            boosted_sample = normalized_sample 
+            #boosted_sample = normalized_sample 
 
             # Pass the boosted sample to the model
-            result = model.enqueue([boosted_sample])
+            result = model.enqueue([raw_sample])
 
-            sample_abs = abs(boosted_sample)
-            if sample_abs > sample_max:
-                sample_max = sample_abs
+            #sample_abs = abs(boosted_sample)
+            #if sample_abs > sample_max:
+                #sample_max = sample_abs
 
             # Check if there is any model output to process
-            output_status = model.dequeue(data_out)
-            if output_status == 0: 
-                max_score = -math.inf
-                best_label = 0
-                for idx, score in enumerate(data_out):
-                    print(f"Label: {label_text[idx]:<10} Score(%): {score*100:.4f}")
-                    if score > max_score:
-                        max_score = score
-                        best_label = idx
+            output_status = model.dequeue(output_buffer)
+            if output_status == 0:
+                count += 1
+                if True:
+                    #count = 0
+                    m = 0
+                
+                    if output_buffer[1] > output_buffer[m]: m = 1
+                    if output_buffer[2] > output_buffer[m]: m = 2
+                    if output_buffer[3] > output_buffer[m]: m = 3
 
-                print("\r\n")
-                print(f"Output: {label_text[best_label]:<30}\r\n")
-
-
-                   
+                
+                    print(m, count, output_buffer)
+        
+        gc.collect()
 
 
 if __name__ == "__main__":
