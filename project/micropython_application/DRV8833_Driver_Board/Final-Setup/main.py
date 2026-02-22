@@ -92,8 +92,8 @@ INTERVAL_US = 1000000 // SAMPLING_FREQ  # 100000 us (1s)
 
 
 """ Allocating arrays for input and output of the model"""
-input_buffer = array.array('f', [0.0] * input_dim)
-output_buffer = array.array('f', [0.0] * output_dim)
+input_buffer = array.array('f', [0.0] * 6)
+output_buffer = array.array('f', [0.0] * 4)
 
 next_sample_time = 0
 """Functioj to fill Input window of model and retrieve status"""
