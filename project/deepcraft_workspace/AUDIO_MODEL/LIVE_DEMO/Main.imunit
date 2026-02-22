@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<Imaginet version="2.0.0.0">
+  <Compound unit="d419d86b-7b57-41d3-9a74-ab428f13a213">
+    <Nodes>
+      <DotNetNode id="node_0" x="244.5" y="260.5" enabled="true" profiling="false" name="conv1d-small-accuracy-2 preprocessor">
+        <Interop assembly="Imaginet.Units.KerasModel" class="Imaginet.Units.KerasModel.KerasModel" method="LoadPreprocessor" />
+        <Input param="input" type="Tensor" />
+        <Input param="File" type="FileReference">
+          <StringArgument>C:/Users/K0Z07/Documents/deepcraft/motor3/maybe_finally_decent_model/conv1d-small-accuracy-2/conv1d-small-accuracy-2.h5</StringArgument>
+        </Input>
+        <Output param="output" type="Tensor" />
+      </DotNetNode>
+      <DotNetNode id="node_1" x="244.5" y="402.5" enabled="true" profiling="false" name="conv1d-small-accuracy-2 model">
+        <Interop assembly="Imaginet.Units.KerasModel" class="Imaginet.Units.KerasModel.KerasModel" method="LoadNetwork" />
+        <Input param="input" type="Tensor" />
+        <Input param="File" type="FileReference">
+          <StringArgument>C:/Users/K0Z07/Documents/deepcraft/motor3/maybe_finally_decent_model/conv1d-small-accuracy-2/conv1d-small-accuracy-2.h5</StringArgument>
+        </Input>
+        <Output param="output" type="Tensor" />
+      </DotNetNode>
+      <LabelListNode id="node_3" width="120" height="120" x="397.4536230674196" y="31.164249897045778" enabled="true" profiling="false" name="Predefined Labels">
+        <Label>working</Label>
+        <Label>impact</Label>
+        <Label>imbalance</Label>
+      </LabelListNode>
+      <DeviceNode id="node_4" x="-59.43510377593378" y="264.0806769737621" enabled="true" profiling="false" name="Microphone" board="290de5cb-460b-41bf-1f19-8d0e240faff7" boardName="PSOC 6 AI (CY8CKIT-06S2-AI)" device="1" />
+      <UnitNode id="node_6" x="702.1230263472053" y="343.3148234136553" enabled="true" profiling="false" name="conv1d-small-accuracy-2 model Labels" unit="ImagimobStudio.Modules.LabelTrack" />
+      <UnitNode id="node_7" x="724.0302724820447" y="199.70065430748707" enabled="true" profiling="false" name="conv1d-small-accuracy-2 model Data" unit="ImagimobStudio.Modules.DataTrack" />
+      <UnitNode id="node_8" x="743.8499617418978" y="87.80245778697076" enabled="true" profiling="false" name="Microphone Data" unit="ImagimobStudio.Modules.DataTrack" />
+    </Nodes>
+    <Connections>
+      <Connection>
+        <Source node="node_0" param="output" />
+        <Target node="node_1" param="input" />
+      </Connection>
+      <Connection>
+        <Source node="node_4" param="Audio" />
+        <Target node="node_0" param="input" />
+      </Connection>
+      <Connection>
+        <Source node="node_1" param="output" />
+        <Target node="node_6" param="data" />
+      </Connection>
+      <Connection>
+        <Source node="node_1" param="output" />
+        <Target node="node_7" param="data" />
+      </Connection>
+      <Connection>
+        <Source node="node_4" param="Audio" />
+        <Target node="node_8" param="data" />
+      </Connection>
+    </Connections>
+  </Compound>
+</Imaginet>
