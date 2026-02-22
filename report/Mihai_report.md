@@ -205,6 +205,16 @@ Note: Only windowing was used as a preprocessor inside DeepCraft, since filterin
 
 ---
 
+The used data for training can be found in:
+
+`main-dir/project/deepcraft_workspace/Mihai_IMU_with_Filters_light_version_deployed`
+
+The generated model can be found in:
+
+`main-dir/project/deepcraft_workspace/Mihai_Models/deployed_micro_python_model_IMU_filtered_medium-balanced`
+
+---
+
 ## 6. Deployment Considerations  
 
 ### 6.1 Embedded Constraints  
