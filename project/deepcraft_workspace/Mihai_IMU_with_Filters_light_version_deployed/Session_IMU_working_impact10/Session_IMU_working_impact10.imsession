@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ImagimobStudio version="0.9">
+  <Timeline id="92c3e08b-e1ca-4a05-87f2-0fd251806161">
+    <Tracks>
+      <Track name="IMU Data" type="datacsv" isLabelTrack="False">
+        <PayloadFile>IMU-Data.data</PayloadFile>
+        <Shape>
+          <Axis name="Axis" size="2">
+            <Label index="0">rms</Label><Label index="1">total_fft_energy</Label></Axis>
+        </Shape>
+      </Track>
+      <Track name="Live Labeling" type="labelcsv">
+        <PayloadFile>Live-Labeling.label</PayloadFile>
+        <Shape><Axis name="Labels" size="1"><Label index="0">imbalance</Label></Axis></Shape>
+      </Track>
+    </Tracks>
+  </Timeline>
+</ImagimobStudio>

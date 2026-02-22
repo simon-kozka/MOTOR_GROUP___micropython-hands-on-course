@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<ImagimobStudio version="2.0.0.0">
+  <Project id="65e7f4bb-ce2c-4a98-bdbe-907ac84e4cbd">
+    <Resources />
+    <Options>
+      <UseCMSIS>true</UseCMSIS>
+    </Options>
+    <CodeGenerationParams>
+      <Unit id="d419d86b-7b57-41d3-9a74-ab428f13a213">
+        <Input>node_100</Input>
+        <Output>node_99</Output>
+        <Platform>GenericC99</Platform>
+        <OutputFileName>Main</OutputFileName>
+        <OutputDirectory>.</OutputDirectory>
+        <CPrefix>IMAI_</CPrefix>
+        <TimestampTracking>false</TimestampTracking>
+        <UseCmsis>true</UseCmsis>
+        <TensorFlowLiteMicroApi>ModusToolbox_ML_Middleware_V3</TensorFlowLiteMicroApi>
+        <PreferEnqueueDequeueApi>false</PreferEnqueueDequeueApi>
+        <MlCoreToolsOptions>
+          <RecursionLimit>1000</RecursionLimit>
+          <MaxBlockDependency>3</MaxBlockDependency>
+          <Sparsity>false</Sparsity>
+          <EthosUMemoryMode>SharedSram</EthosUMemoryMode>
+          <EthosUOptimize>Performance</EthosUOptimize>
+          <EthosUSystemConfig>Pse8xSOCMEM300MHz</EthosUSystemConfig>
+          <EthosUTensorAllocator>HillClimb</EthosUTensorAllocator>
+        </MlCoreToolsOptions>
+      </Unit>
+    </CodeGenerationParams>
+  </Project>
+</ImagimobStudio>

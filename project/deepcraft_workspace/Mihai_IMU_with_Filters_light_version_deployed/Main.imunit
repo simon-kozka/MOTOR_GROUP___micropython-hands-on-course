@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<Imaginet version="2.0.0.0">
+  <Compound unit="d419d86b-7b57-41d3-9a74-ab428f13a213">
+    <Nodes>
+      <DotNetNode id="node_99" x="-1575.545184532548" y="941.7300029074554" enabled="true" profiling="false" name="conv1d-medium-balanced-3 model">
+        <Interop assembly="Imaginet.Units.KerasModel" class="Imaginet.Units.KerasModel.KerasModel" method="LoadNetwork" />
+        <Input param="File" type="FileReference">
+          <StringArgument>D:/ToSync/Mihai/TU_Wien/Semester/Semester_3/FW_Infineon/Deepcraft/Classify_Filtered_light_IMU/new/conv1d-medium-balanced-3/conv1d-medium-balanced-3.h5</StringArgument>
+        </Input>
+        <Input param="input" type="Tensor" />
+        <Output param="output" type="Tensor" />
+      </DotNetNode>
+      <UnitNode id="node_100" x="-2011.6502135858827" y="1167.0254757933162" enabled="true" profiling="false" unit="Imaginet.Units.Signal.SlidingWindow">
+        <Int32Argument param="stride">200</Int32Argument>
+        <ShapeArgument param="window_shape">[100,2]</ShapeArgument>
+      </UnitNode>
+      <UnitNode id="node_101" x="-1114.3884817072537" y="990.4668923857853" enabled="true" profiling="false" name="conv1d-medium-balanced-3 model Data" unit="ImagimobStudio.Modules.DataTrack" />
+      <UnitNode id="node_102" x="-1653.442185216937" y="802.6210497527288" enabled="true" profiling="false" name="IMU-Data Data" unit="ImagimobStudio.Modules.DataTrack" />
+      <DotNetNode id="node_108" x="-1529.5923842170664" y="1243.5637780623747" enabled="true" profiling="false" name="conv1d-medium-balanced-1 model">
+        <Interop assembly="Imaginet.Units.KerasModel" class="Imaginet.Units.KerasModel.KerasModel" method="LoadNetwork" />
+        <Input param="File" type="FileReference">
+          <StringArgument>D:/ToSync/Mihai/TU_Wien/Semester/Semester_3/FW_Infineon/Deepcraft/Classify_Filtered_light_IMU/new/10Hz/conv1d-medium-balanced-1/conv1d-medium-balanced-1.h5</StringArgument>
+        </Input>
+        <Input param="input" type="Tensor" />
+        <Output param="output" type="Tensor" />
+      </DotNetNode>
+      <UnitNode id="node_109" x="-2369.773635266673" y="954.414040142015" enabled="true" profiling="false" name="IMU-Data" unit="Imaginet.Units.Io.CsvFileReader">
+        <StringArgument param="file_path">Session_IMU_working_impact1/IMU-Data.data</StringArgument>
+      </UnitNode>
+    </Nodes>
+    <Connections>
+      <Connection>
+        <Source node="node_109" param="data" />
+        <Target node="node_100" param="input" />
+      </Connection>
+      <Connection>
+        <Source node="node_109" param="data" />
+        <Target node="node_102" param="data" />
+      </Connection>
+      <Connection>
+        <Source node="node_100" param="output" />
+        <Target node="node_99" param="input" />
+      </Connection>
+      <Connection>
+        <Source node="node_99" param="output" />
+        <Target node="node_101" param="data" />
+      </Connection>
+    </Connections>
+  </Compound>
+</Imaginet>
