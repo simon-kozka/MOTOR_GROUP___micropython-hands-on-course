@@ -155,9 +155,9 @@ def main():
             print("Motor HIT something")
             print("EMERGENCY STOP")
             break
-        """reducing amount of frequent printing with simple counter
-           (to prevent buffer overflow)""" 
-        elif count > 13 : 
+            """reducing amount of frequent printing with simple counter
+            (to prevent buffer overflow)""" 
+        elif count > 13 :
             count = 0
             if status == 0 : #unlabled
                 print("Motor is NOT spinnig")
