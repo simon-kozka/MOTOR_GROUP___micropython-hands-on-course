@@ -20,7 +20,17 @@ The system was designed for deployment on embedded hardware, requiring efficient
 
 ## 2. Data Acquisition  
 
-### 2.1 Sensor Configuration  
+### 2.1 Universal Test Bench
+
+To ensure consistent and reproducible data collection across the entire team, a universal test bench was designed and implemented. This setup standardizes hardware configuration, sensor placement, and measurement procedures, minimizing variability between individual test runs and operators. 
+
+3D-files and schematic can be found in:
+
+`main-dir/project/base_station_3d_files`
+
+`main-dir/project/schematic`
+
+### 2.2 Sensor Configuration  
 
 - Sensor type: IMU (Accelerometer only)  
 - Sampling frequency: **400 Hz**  
